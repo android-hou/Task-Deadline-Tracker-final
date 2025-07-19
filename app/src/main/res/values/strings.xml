@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Task - Deadline Tracker</string>
+    <string name="app_logo_desc">Logo app</string>
+    <string name="add_new">Thêm mới</string>
+    <string name="total_tasks">Tổng: 0 task</string>
+    <string name="pending_tasks">Đang thực hiện: 0</string>
+    <string name="completed_tasks">Hoàn thành: 0</string>
+    <string name="search_hint">Tìm kiếm task...</string>
+    <string name="filter">Bộ lọc</string>
+    <string name="filter_all">Tất cả</string>
+    <string name="filter_pending">Đang thực hiện</string>
+    <string name="filter_completed">Hoàn thành</string>
+    <string name="filter_overdue">Quá hạn</string>
+    <string name="filter_priority">Ưu tiên cao</string>
+    <string name="no_tasks">Không có task</string>
+    <string name="no_tasks_title">Chưa có task nào</string>
+    <string name="no_tasks_message">Nhấn nút + để thêm task đầu tiên</string>
+    <string name="view_all_tasks">Xem tất cả task</string>
+    <string name="add_task">Thêm task mới</string>
+</resources>

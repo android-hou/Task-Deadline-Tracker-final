@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- Background circle -->
+    <path
+        android:fillColor="#F5F5F5"
+        android:pathData="M60,60m-50,0a50,50 0,1 1,100 0a50,50 0,1 1,-100 0" />
+
+    <!-- Clipboard base -->
+    <path
+        android:fillColor="#E0E0E0"
+        android:pathData="M35,25 L85,25 L85,95 L35,95 Z" />
+
+    <!-- Clipboard header -->
+    <path
+        android:fillColor="#BDBDBD"
+        android:pathData="M35,25 L85,25 L85,35 L35,35 Z" />
+
+    <!-- Clipboard clip -->
+    <path
+        android:fillColor="#9E9E9E"
+        android:strokeColor="#757575"
+        android:strokeWidth="1"
+        android:pathData="M50,20 L70,20 L70,30 L50,30 Z" />
+
+    <!-- Empty task lines (solid) -->
+    <path
+        android:strokeColor="#CCCCCC"
+        android:strokeWidth="2"
+        android:pathData="M42,45 L75,45" />
+
+    <path
+        android:strokeColor="#CCCCCC"
+        android:strokeWidth="2"
+        android:pathData="M42,55 L70,55" />
+
+    <path
+        android:strokeColor="#CCCCCC"
+        android:strokeWidth="2"
+        android:pathData="M42,65 L78,65" />
+
+    <path
+        android:strokeColor="#CCCCCC"
+        android:strokeWidth="2"
+        android:pathData="M42,75 L65,75" />
+
+    <!-- Checkboxes as tiny filled squares -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:strokeColor="#CCCCCC"
+        android:strokeWidth="1"
+        android:pathData="M40,42 h6 v6 h-6 z" />
+
+    <path
+        android:fillColor="#FFFFFF"
+        android:strokeColor="#CCCCCC"
+        android:strokeWidth="1"
+        android:pathData="M40,52 h6 v6 h-6 z" />
+
+    <path
+        android:fillColor="#FFFFFF"
+        android:strokeColor="#CCCCCC"
+        android:strokeWidth="1"
+        android:pathData="M40,62 h6 v6 h-6 z" />
+
+    <path
+        android:fillColor="#FFFFFF"
+        android:strokeColor="#CCCCCC"
+        android:strokeWidth="1"
+        android:pathData="M40,72 h6 v6 h-6 z" />
+
+    <!-- Simple "+" symbol -->
+    <path
+        android:strokeColor="#CCCCCC"
+        android:strokeWidth="2"
+        android:pathData="M60,85 L60,95" />
+
+    <path
+        android:strokeColor="#CCCCCC"
+        android:strokeWidth="2"
+        android:pathData="M55,90 L65,90" />
+
+</vector>

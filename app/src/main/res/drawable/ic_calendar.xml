@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp" android:height="24dp"
+    android:viewportWidth="24" android:viewportHeight="24">
+    <!-- Khung calendar -->
+    <path
+        android:strokeColor="#666666"
+        android:strokeWidth="2"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M3,4h18v17H3z"/>
+    <!-- Hai vòng tròn chỉ ngày -->
+    <path
+        android:strokeColor="#666666"
+        android:strokeWidth="2"
+        android:pathData="M7,2v4M17,2v4"/>
+    <!-- Các ô ngày (gạch ngang dọc đơn giản) -->
+    <path
+        android:strokeColor="#666666"
+        android:strokeWidth="1"
+        android:pathData="M3,9h18M8,4v17M16,4v17"/>
+</vector>
