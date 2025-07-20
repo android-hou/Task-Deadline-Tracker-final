@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import java.io.Serializable;
 import java.util.Date;
 public class Entity_User implements Parcelable, Serializable {
-    private static int total = 0;
+    private static int total = 1;
     private int id;
     private String username;
 
