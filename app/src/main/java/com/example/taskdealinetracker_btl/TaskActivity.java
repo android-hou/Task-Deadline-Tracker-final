@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.LayoutInflater;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -22,9 +22,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.taskdealinetracker_btl.utils.DatabaseHelper;
 import com.example.taskdealinetracker_btl.modules.Entity_Task;
 import com.example.taskdealinetracker_btl.modules.Entity_User;
+import com.example.taskdealinetracker_btl.utils.DatabaseHelper;
+import com.example.taskdealinetracker_btl.utils.ReminderScheduler;
+import com.example.taskdealinetracker_btl.reminder.ReminderReceiver;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -73,6 +75,7 @@ public class TaskActivity extends AppCompatActivity {
             addLauncher.launch(i);
         });
 
+        // filter buttons
         btnFilterAll.setOnClickListener(v -> { activeFilter = "all"; applyFilterAndRefresh(); });
         btnFilterPending.setOnClickListener(v -> { activeFilter = "active"; applyFilterAndRefresh(); });
         btnFilterCompleted.setOnClickListener(v -> { activeFilter = "finish"; applyFilterAndRefresh(); });
@@ -83,6 +86,7 @@ public class TaskActivity extends AppCompatActivity {
             i.putExtra("user", (Parcelable) user);
             startActivity(i);
         });
+
         txtSearch.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int st, int b, int c) {}
             @Override public void onTextChanged(CharSequence s, int st, int b, int c) { applyFilterAndRefresh(); }
@@ -97,7 +101,6 @@ public class TaskActivity extends AppCompatActivity {
         rvTasks.setAdapter(adapter);
 
         txtSearch = findViewById(R.id.etSearch);
-
         btnFilterAll       = findViewById(R.id.btnFilterAll);
         btnFilterPending   = findViewById(R.id.btnFilterPending);
         btnFilterCompleted = findViewById(R.id.btnFilterCompleted);
@@ -120,6 +123,8 @@ public class TaskActivity extends AppCompatActivity {
                             long id = dbHelper.insertTask(newTask);
                             newTask.setId((int) id);
                             tasks.add(0, newTask);
+                            // schedule reminders for new task
+                            ReminderScheduler.scheduleTaskReminders(this, newTask);
                             applyFilterAndRefresh();
                             rvTasks.scrollToPosition(0);
                             Toast.makeText(this, "Thêm Task mới thành công!", Toast.LENGTH_SHORT).show();
@@ -134,6 +139,8 @@ public class TaskActivity extends AppCompatActivity {
                         Intent data = result.getData();
                         if (data.hasExtra("deleted_id")) {
                             int delId = data.getIntExtra("deleted_id", -1);
+                            // cancel all reminders for deleted task
+                            ReminderScheduler.cancelAllReminders(this, delId);
                             for (int i = 0; i < tasks.size(); i++) {
                                 if (tasks.get(i).getId() == delId) {
                                     tasks.remove(i);
@@ -149,6 +156,8 @@ public class TaskActivity extends AppCompatActivity {
                                     break;
                                 }
                             }
+                            // update reminder schedule based on updated task
+                            ReminderScheduler.updateTaskReminders(this, updated);
                             Toast.makeText(this, "Cập nhật Task thành công!", Toast.LENGTH_SHORT).show();
                         }
                         applyFilterAndRefresh();
@@ -196,7 +205,7 @@ public class TaskActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        dbHelper.close();
+        if (dbHelper != null) dbHelper.close();
     }
 
     private class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
@@ -227,6 +236,8 @@ public class TaskActivity extends AppCompatActivity {
                 t.setComplete(chk);
                 t.setUpdatedAt(new Date());
                 dbHelper.updateTask(t);
+                // update reminders when completion status changes
+                ReminderScheduler.updateTaskReminders(TaskActivity.this, t);
                 updateStats();
             });
 

@@ -69,4 +69,8 @@ public class Entity_User implements Parcelable, Serializable {
     public String getUsername() {
         return username;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
